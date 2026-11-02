@@ -388,7 +388,7 @@ test('hcloud 降级模式拼出 ProjectMan 命令并返回成功', async () => {
 
     const argv = JSON.parse(fs.readFileSync(logFile, 'utf8'));
     assert.equal(argv[0], 'ProjectMan');
-    assert.equal(argv[1], 'CreateIssue');
+    assert.equal(argv[1], 'CreateIssueV4');
     assert.ok(argv.includes(`--project_id=${PROJECT_ID}`));
     assert.ok(argv.includes('--tracker_id=2'));
     assert.ok(argv.includes('--priority_id=3'));

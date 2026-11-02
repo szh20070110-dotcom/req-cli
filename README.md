@@ -1,3 +1,5 @@
+![验收记录](resources/evidence.png)
+
 # req-cli
 
 用 Node.js 封装华为云 CodeArts 需求管理（ProjectMan v4）的极简命令行工具：**零第三方依赖**，只使用 Node 内置模块，覆盖「创建工作项」和「查询工作项列表」两个高频操作。
@@ -236,3 +238,14 @@ test-cli.mjs      真实进程测试
 | 查询工作项列表 | `GET` | `/v4/projects/{project_id}/issues?limit&offset` |
 
 请求体字段：`tracker_id`、`subject`、`priority_id`、`description`、`status_id`、`severity_id`、`assigned_id`、`parent_issue_id`、`iteration_id`、`begin_time`、`end_time`。
+## 真实调用记录
+
+降级模式走的是 hcloud ProjectMan：ListIssuesV4 查询、CreateIssueV4 创建（hcloud 里没有不带 V4 的 ListIssues，会报 USE_ERROR）。
+
+```bash
+set CODEARTS_REQ_AUTH=hcloud
+set CODEARTS_REQ_HCLOUD_BIN=["C:/Users/szh/AppData/Local/Programs/.huawei/bin/hcloud.exe"]
+node bin/req-cli.mjs issue list --project-id 0123456789abcdef0123456789abcdef --json
+```
+
+hcloud 在报错时会在 JSON 后面追加一行「错误详情参见错误中心…」，所以解析做了容错：先整段解析，失败就截取第一个 { 到最后一个 } 再解析。
