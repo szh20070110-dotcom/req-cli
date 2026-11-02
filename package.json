@@ -1,0 +1,28 @@
+{
+  "name": "req-cli",
+  "version": "1.0.0",
+  "description": "华为云 CodeArts 需求管理工作项命令行工具（创建工作项 / 查询工作项列表）",
+  "type": "module",
+  "bin": {
+    "req-cli": "bin/req-cli.mjs"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node test-cli.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "huaweicloud",
+    "codearts",
+    "projectman",
+    "cli"
+  ],
+  "license": "MIT",
+  "private": true
+}
